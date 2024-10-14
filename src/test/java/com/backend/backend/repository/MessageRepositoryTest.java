@@ -2,6 +2,8 @@ package com.backend.backend.repository;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -11,6 +13,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.h2.command.dml.MergeUsing.When;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -81,6 +84,24 @@ class MessageRepositoryTest {
         assertTrue(messageFound.get().getContent().equals(message.getContent()));
 
         verify(repository, times(1)).findById(any(UUID.class));
+
+    }
+
+    @Test
+    void shootListAllMessages() {
+
+        List<Message> messageReceive = Arrays.asList();
+        List messageList = Arrays.asList(
+                genericMessage(),
+                genericMessage());
+
+        when(repository.findAll()).thenReturn(messageList);
+
+        messageReceive = repository.findAll();
+
+        assertNotNull(messageReceive);
+        assertTrue(!messageReceive.isEmpty());
+        assertEquals(2, messageReceive.size());
 
     }
 
