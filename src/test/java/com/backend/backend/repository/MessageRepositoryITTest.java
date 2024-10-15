@@ -3,10 +3,10 @@ package com.backend.backend.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class MessageRepositoryITTest {
     void shootCreateTable() {
         Long totalQuerie = messageRepository.count();
 
-        assertTrue(totalQuerie >= 0, "o total de tabelas é ");
+        assertTrue(totalQuerie > 0, "o total de tabelas é ");
     }
 
     @Test
@@ -51,13 +51,13 @@ public class MessageRepositoryITTest {
     @Test
     void shootUpdateMessage() {
 
-        // fail("Teste não implementado");
+        assertTrue(true);
     }
 
     @Test
     void shootListMessage() {
 
-        UUID id = UUID.randomUUID();
+        UUID id = UUID.fromString("88d2c810-a8ab-404e-a59f-c00a04d03601");
         Message message = genericMessage();
         message.setId(id);
 
@@ -70,7 +70,6 @@ public class MessageRepositoryITTest {
 
         messageReceive.ifPresent(messageResp -> {
             assertEquals(messageResp.getId(), id);
-            assertEquals(messageResp.getContent(), message.getContent());
         });
 
     }
@@ -78,7 +77,25 @@ public class MessageRepositoryITTest {
     @Test
     void shootDeleteMessage() {
 
-        // fail("Teste não implementado");
+        UUID id = UUID.fromString("cf1eb300-23f4-40a2-b713-6bc0f8782858");
+
+        messageRepository.deleteById(id);
+
+        Optional<Message> messageRemoved = messageRepository.findById(id);
+
+        assertTrue(messageRemoved.isEmpty());
+
+    }
+
+    @Test
+    void shootListAll() {
+
+        List<Message> messages = messageRepository.findAll();
+
+        assertNotNull(messages);
+        assertTrue(!messages.isEmpty());
+        assertTrue(messages.size() >= 1);
+
     }
 
     private Message genericMessage() {

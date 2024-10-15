@@ -1,14 +1,21 @@
 spring:
     datasource:
         url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
         username: root
         password: root
-        driverClassName: org.h2.Driver
+        initialize: true
 
-jpa:
-    database: h2
-    database-plataform: org.hibernate.dialect.H2Dialect
+    sql:
+        init:
+            mode: always
+            schema-locations: classpath:schema.sql
+            data-locations: classpath:data.sql
 
-h2:
-    console:
-        enable: true
+    jpa:
+        hibernate:
+            ddl-auto: none
+
+    h2:
+        console:
+            enable: true

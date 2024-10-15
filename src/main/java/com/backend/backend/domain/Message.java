@@ -18,7 +18,7 @@ import lombok.Builder.Default;
 @Data
 @Builder
 @AllArgsConstructor
-@Table(name = "TB_Message")
+@Table(name = "tb_Message")
 public class Message {
 
     public Message() {
