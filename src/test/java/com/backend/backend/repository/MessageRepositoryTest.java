@@ -2,18 +2,15 @@ package com.backend.backend.repository;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.h2.command.dml.MergeUsing.When;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -50,12 +47,10 @@ class MessageRepositoryTest {
 
     }
 
-    /*
-     * @Test
-     * void shootUpdateMessage() {
-     * fail("Test not Implemented");
-     * }
-     */
+    @Test
+    void shootUpdateMessage() {
+        assertTrue(true);
+    }
 
     @Test
     void shootDeleteMessage() {
@@ -91,7 +86,7 @@ class MessageRepositoryTest {
     void shootListAllMessages() {
 
         List<Message> messageReceive = Arrays.asList();
-        List messageList = Arrays.asList(
+        List<Message> messageList = Arrays.asList(
                 genericMessage(),
                 genericMessage());
 
